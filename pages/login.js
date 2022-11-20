@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Login() {
@@ -13,7 +14,7 @@ export default function Login() {
       );
   };
   const validatePassword = () => {
-    if (password.length >= 6 && password.length <= 16) {
+    if (password?.length >= 6 && password?.length <= 16) {
       return true;
     }
     return false;
@@ -83,7 +84,7 @@ export default function Login() {
         <div className="login-log">
           <div className="login-checkbox">
             <input type="checkbox" id="scales" name="scales" />
-            <label for="scales">Remember me</label>
+            <label htmlFor="scales">Remember me</label>
           </div>
           <span className="forgot-password">Forgot Password?</span>
         </div>
@@ -92,7 +93,10 @@ export default function Login() {
         </button>
 
         <span className="signup-btn">
-          Don't have an account?<a href="/signup">Create Account</a>
+          Don&#39;t have an account?
+          <Link className="signup-link" href="/signup">
+            Create Account
+          </Link>
         </span>
       </div>
       <div className="login-bottom">

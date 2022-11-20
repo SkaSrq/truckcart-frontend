@@ -18,7 +18,7 @@ export default function Signup() {
       );
   };
   const validatePassword = () => {
-    if (password.length >= 6 && password.length <= 16) {
+    if (password?.length >= 6 && password?.length <= 16) {
       return true;
     } else return false;
   };
