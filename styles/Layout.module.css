@@ -2,6 +2,14 @@
   padding: 0 2rem;
 }
 
+.full-body {
+  height: 100vh;
+}
+
+.main-body {
+  height: calc(100vh - 64px);
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
@@ -116,13 +124,16 @@
 }
 
 @media (prefers-color-scheme: dark) {
+
   .card,
   .footer {
     border-color: #222;
   }
+
   .code {
     background: #111;
   }
+
   .logo img {
     filter: invert(1);
   }
