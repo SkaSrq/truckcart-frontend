@@ -35,6 +35,7 @@ jobs:
           
             #Now we have got the access of EC2 and we will start the deploy .
             DIR="/home/ubuntu/truckcart-frontend"
+            nvm use 16.13.0
             pm2 delete all
             cd /home/ubuntu
             
