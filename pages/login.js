@@ -99,12 +99,12 @@ export default function Login() {
           </Link>
         </span>
       </div>
-      <div className="login-bottom">
-        <div className="wave wave1"></div>
-        <div className="wave wave2"></div>
-        <div className="wave wave3"></div>
-        <div className="wave wave4"></div>
-      </div>
+      {/* <div className="login-bottom"> */}
+      <div className="wave wave1"></div>
+      <div className="wave wave2"></div>
+      <div className="wave wave3"></div>
+      <div className="wave wave4"></div>
     </div>
+    // </div>
   );
 }

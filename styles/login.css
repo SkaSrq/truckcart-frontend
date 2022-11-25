@@ -5,6 +5,7 @@
     background-color: #f4f8fb84;
     align-items: center;
     justify-content: center;
+    height: --webkit-fill-available;
 }
 
 .login-wrapper {
@@ -13,6 +14,30 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+}
+
+@media only screen and (orientation: landscape) {
+    .login-wrapper {
+        height: calc(100%);
+        height: --webkit-fill-available;
+        width: 347px;
+        overflow: hidden;
+    }
+
+    .wave {
+        display: none !important;
+    }
+
+    .single-page {
+        height: calc(100vh - 64px);
+        height: --webkit-fill-available;
+        overflow: hidden;
+    }
+
+    .login-header {
+        font-size: 24px !important;
+        height: 30px !important;
+    }
 }
 
 .login-wrapper .login-header {
@@ -27,7 +52,7 @@
 }
 
 .login-wrapper .login-input {
-    width: 347px;
+    width: 100%;
     position: relative;
     z-index: 1;
     margin: 15px 0px;
@@ -160,16 +185,16 @@
     color: #0781df;
 }
 
-.login-bottom {
+/* .login-bottom {
     position: absolute;
     bottom: 0;
     left: 0;
     height: 120px;
     width: 100%;
     overflow: hidden;
-}
+} */
 
-.login-bottom .wave {
+.wave {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -177,10 +202,10 @@
     height: 100px;
     background-image: url(../public/wave.png);
     background-size: 1000px 100px;
-
+    overflow: auto
 }
 
-.login-bottom .wave.wave1 {
+.wave.wave1 {
     animation: wave-animate 5s linear infinite;
     z-index: 1000;
     opacity: 1;
@@ -188,7 +213,7 @@
     bottom: 0px;
 }
 
-.login-bottom .wave.wave2 {
+.wave.wave2 {
     animation: wave-animate2 15s linear infinite;
     z-index: 999;
     opacity: 0.6;
@@ -196,7 +221,7 @@
     bottom: 5px;
 }
 
-.login-bottom .wave.wave3 {
+.wave.wave3 {
     animation: wave-animate 20s linear infinite;
     z-index: 998;
     opacity: 0.4;
@@ -204,7 +229,7 @@
     bottom: 10px;
 }
 
-.login-bottom .wave.wave4 {
+.wave.wave4 {
     animation: wave-animate2 30s linear infinite;
     z-index: 997;
     opacity: 0.2;
