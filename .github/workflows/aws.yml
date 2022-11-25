@@ -56,6 +56,6 @@ jobs:
             git reset --hard origin/main &&
             git pull origin main &&
             npm i &&
-            npm build &&
+            npm run build &&
             pm2 restart 3
           '
