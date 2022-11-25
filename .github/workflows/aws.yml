@@ -57,5 +57,5 @@ jobs:
             git pull origin main &&
             npm i &&
             npm run build &&
-            pm2 restart 3
+            pm2 start npm --name "nextjs-truckcart" -- start
           '
