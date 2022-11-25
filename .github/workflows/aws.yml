@@ -34,26 +34,25 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
           
             #Now we have got the access of EC2 and we will start the deploy .
-            DIR="/home/ec2-user/server"
+            DIR="/home/ubuntu/truckcart-frontend"
             pm2 delete all
-            cd /home/ec2-user
+            cd /home/ubuntu
             
             if [ ! -d $DIR ]
             then
               mkdir server &&
               git config --global url."https://${ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/" &&
               git clone https://github.com/SkaSrq/truckcart-frontend.git &&
-              cd truckcart-frontend &&
-              npm i
+              cd truckcart-frontend
             else
-              cd truckcart-frontend &&
-              npm i
+              cd truckcart-frontend
             fi
             
             git checkout main &&
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
+            npm i &&
             npm build &&
             pm2 restart 3
           '
