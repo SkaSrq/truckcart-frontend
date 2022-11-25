@@ -1,0 +1,61 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Deploy in EC2
+        env:
+            PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY  }}
+            HOSTNAME : ${{ secrets.HOSTNAME  }}
+            USER_NAME : ${{ secrets.USER  }}
+            ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+            
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          
+            #Now we have got the access of EC2 and we will start the deploy .
+            DIR="/home/ubuntu/truckcart-frontend"
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh 
+            nvm use 16.13.0
+            pm2 delete all
+            cd /home/ubuntu
+            
+            if [ ! -d $DIR ]
+            then
+              mkdir server &&
+              git config --global url."https://${ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/" &&
+              git clone https://github.com/SkaSrq/truckcart-frontend.git &&
+              cd truckcart-frontend
+            else
+              cd truckcart-frontend
+            fi
+            
+            git checkout main &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            git pull origin main &&
+            npm i &&
+            npm run build &&
+            pm2 start npm --name "nextjs-truckcart" -- start
+          '
